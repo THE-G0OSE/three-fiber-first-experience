@@ -1,7 +1,7 @@
 import {motion, useMotionValue} from 'motion/react'
 import { enumRotateDirection, setRotation } from "../../../../feature/rotation/model/RotationSlice"
 import { useRef } from 'react'
-import { useAppDispatch } from '../../../../app/provider/store/hooks'
+import { useAppDispatch } from '../../../lib/hooks'
 
 interface IProps {
     type: 'rotation'

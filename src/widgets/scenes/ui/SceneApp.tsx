@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../app/provider/store/hooks"
+import { useAppSelector } from "../../../shared/lib/hooks"
 import { selectRotation } from "../../../feature/rotation/model/RotationSlice"
 
 const SceneApp = () => {
