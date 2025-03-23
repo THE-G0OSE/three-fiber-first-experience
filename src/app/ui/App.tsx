@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
-import HomePage from "../../pages-api/home-page/ui/HomePage"
-import LayoutApp from "../../widgets/layout/layout-app/ui/LayoutApp"
-import StoreProvider from "../provider/store/ui/StoreProvider"
+import HomePage from "@/pages-api/home-page/ui/HomePage"
+import LayoutApp from "@/widgets/layout/layout-app/ui/LayoutApp"
+import StoreProvider from "@/app/provider/store/ui/StoreProvider"
 
 const App = () => {
 

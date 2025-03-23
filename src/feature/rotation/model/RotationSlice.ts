@@ -1,27 +1,40 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../app/provider/store/store";
+import { RootState } from "@/app/provider/store/store";
+import { enumAxis } from "@/shared";
+import { enumType } from "@/shared/model";
 
 interface IRotation {
-    rotationX: number;
-    rotationY: number;
-    rotationZ: number;
+    slider: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    drag: {
+        x: number;
+        y: number;
+        z: number;
+    }
 }
     
 const initialState: IRotation = {
-    rotationX: 0,
-    rotationY: 0,
-    rotationZ: 0
-}
+    slider: {
+        x: 0,
+        y: 0,
+        z: 0,
+    },
+    drag: {
+        x: 0,
+        y: 0,
+        z: 0,
+    }
 
-export enum enumRotateDirection {
-    X = 'rotationX',
-    Y = 'rotationY',
-    Z = 'rotationZ',
+
 }
 
 type actionPayload = {
-    direction: enumRotateDirection,
-    value: number
+    type: enumType,
+    axis: enumAxis,
+    value: number,
 }
 
 export const rotationSlice = createSlice({
@@ -29,13 +42,13 @@ export const rotationSlice = createSlice({
     initialState,
     reducers: {
         setRotation: (state, action: PayloadAction<actionPayload>) => {
-           state[action.payload.direction] = action.payload.value 
+            state[action.payload.type][action.payload.axis] = action.payload.value 
         },
         addRotation: (state, action: PayloadAction<actionPayload>) => {
-            state[action.payload.direction] += action.payload.value
+            state[action.payload.type][action.payload.axis] += action.payload.value
         },
         removeRotation: (state, action: PayloadAction<actionPayload>) => {
-            state[action.payload.direction] -= action.payload.value
+            state[action.payload.type][action.payload.axis] -= action.payload.value
         }
     }
 })

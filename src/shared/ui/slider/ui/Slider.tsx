@@ -1,11 +1,22 @@
 import {motion, useMotionValue} from 'motion/react'
-import { enumRotateDirection, setRotation } from "../../../../feature/rotation/model/RotationSlice"
+import { setRotation } from "@/feature/rotation/model/RotationSlice"
 import { useRef } from 'react'
-import { useAppDispatch } from '../../../lib/hooks'
+import { useAppDispatch } from '@/shared/lib/hooks'
+import { setSize } from '@/feature/size'
+import { enumType } from '@/shared/model'
+
+export enum enumAxis {
+    X = 'x',
+    Y = 'y',
+    Z = 'z',
+}
 
 interface IProps {
-    type: 'rotation'
-    property: enumRotateDirection     
+    type: 'rotation' | 'size'
+    property: { 
+        axis: enumAxis,
+        type: enumType,
+    }
 }
 
 const Slider: React.FC<IProps> = ({type, property}) => {
@@ -15,7 +26,13 @@ const Slider: React.FC<IProps> = ({type, property}) => {
     const x = useMotionValue(0)
 
     x.on('change', () => {
-        dispatch(setRotation({direction: property, value: x.get()}))
+        switch(type) {
+            case 'rotation':
+                dispatch(setRotation({axis: property.axis, type: property.type, value: x.get()}))
+                break;
+            case 'size':
+                dispatch(setSize({axis: property.axis,value: x.get(), type: property.type}))
+        }
     })
 
     const containerRef = useRef<HTMLDivElement | null>(null)
